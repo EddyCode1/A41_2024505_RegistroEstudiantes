@@ -17,4 +17,5 @@ public class Cursos {
     private Integer codigoCurso; // permite usar null en vez de 0 el Integer
     @Column
     private String nombreCurso;
+    private Integer codigoEstudiante;
 }
