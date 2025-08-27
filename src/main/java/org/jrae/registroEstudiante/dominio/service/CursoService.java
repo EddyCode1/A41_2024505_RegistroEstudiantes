@@ -1,6 +1,5 @@
 package org.jrae.registroEstudiante.dominio.service;
 
-import org.jrae.registroEstudiante.ICursosService;
 import org.jrae.registroEstudiante.persistence.crud.CursoCrud;
 import org.jrae.registroEstudiante.persistence.entity.Cursos;
 import org.springframework.beans.factory.annotation.Autowired;

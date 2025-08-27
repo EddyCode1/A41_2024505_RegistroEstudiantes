@@ -3,6 +3,7 @@ package org.jrae.registroEstudiante;
 import org.jrae.registroEstudiante.dominio.service.CursoService;
 import org.jrae.registroEstudiante.dominio.service.EstudianteService;
 import org.jrae.registroEstudiante.dominio.service.IEstudianteService;
+import org.jrae.registroEstudiante.dominio.service.ICursosService;
 import org.jrae.registroEstudiante.dominio.service.InfoEstudiante;
 import org.jrae.registroEstudiante.dominio.service.InfoCursos;
 import org.springframework.boot.SpringApplication;
@@ -17,10 +18,10 @@ public class RegistroEstudianteApplication {
 		var context = SpringApplication.run(RegistroEstudianteApplication.class, args);
 
 		IEstudianteService estudianteService = context.getBean(EstudianteService.class);
-		ICursosService cursosService = context.getBean(CursoService.class);
+		ICursosService cursosService = context.getBean(ICursosService.class);
 
 		InfoEstudiante infoEstudiante = new InfoEstudiante(estudianteService);
-		// InfoCursos infoCursos = new InfoCursos(cursosService);
+		InfoCursos infoCursos = new InfoCursos(cursosService);
 
 		Scanner consola = new Scanner(System.in);
 		boolean salir = false;
@@ -37,7 +38,7 @@ public class RegistroEstudianteApplication {
 
 			switch (opcion) {
 				case 1 -> infoEstudiante.ejecutar();
-				// case 2 -> infoCursos.menuCursos();
+				case 2 -> infoCursos.menuCursos();
 				case 3 -> salir = true;
 				default -> System.out.println("Opción no válida!");
 			}
