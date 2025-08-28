@@ -30,7 +30,8 @@ public class InfoCursos {
                     3. Agregar Nuevo Curso
                     4. Modificar Curso
                     5. Eliminar Curso
-                    6. Salir
+                    6. Asignar Estudiante a un Curso 
+                    7. Salir
                     Ejecutar una opción: """);
 
             int opcion = Integer.parseInt(consola.nextLine());
@@ -52,6 +53,7 @@ public class InfoCursos {
                 logger.info(sl + "Buscar Curso por nombre ***" + sl);
                 String nombre = consola.nextLine();
                 Cursos curso = cursosService.buscarCursoPorNombre(nombre);
+
                 if (curso != null) {
                     logger.info("Curso encontrado:" + sl + curso + sl);
                 } else {
@@ -97,6 +99,16 @@ public class InfoCursos {
                 }
             }
             case 6 -> {
+                logger.info(sl + "*** Asignar estudiante a un curso ***" + sl);
+                logger.info("Ingrese el código del curso: ");
+                Integer codigoCurso = Integer.parseInt(consola.nextLine());
+                logger.info("Ingrese el código del estudiante: ");
+                Integer codigoEstudiante = Integer.parseInt(consola.nextLine());
+                cursosService.asignarEstudianteACurso(codigoCurso, codigoEstudiante);
+                logger.info("Estudiante asignado al curso con éxito!" + sl);
+            }
+
+            case 7 -> {
                 logger.info("Hasta pronto! " + sl);
                 salir = true;
             }

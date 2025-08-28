@@ -1,7 +1,6 @@
 package org.jrae.registroEstudiante.dominio.service;
 
 import org.jrae.registroEstudiante.persistence.entity.Estudiante;
-import org.jrae.registroEstudiante.dominio.service.IEstudianteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -55,10 +54,10 @@ public class InfoEstudiante {
                 estudiantes.forEach(estudiante -> logger.info(estudiante.toString() + sl));
             }
             case 2 -> {
-                logger.info(sl + "Buscar Estudiante por su código ***" + sl);
-                logger.info("Ingrese código del estudiante: ");
-                int codigo = Integer.parseInt(consola.nextLine());
-                Estudiante estudiante = estudianteService.buscarEstudiantePorId(codigo);
+                logger.info(sl + "Buscar Estudiante por su nombre ***" + sl);
+                logger.info("Ingrese nombre del estudiante: ");
+                String nombreEstudiante = consola.nextLine();
+                Estudiante estudiante = estudianteService.buscarEstudiantePorNombre(nombreEstudiante);
                 if (estudiante != null) {
                     logger.info("Estudiante encontrado:" + sl + estudiante + sl);
                 } else {
@@ -85,8 +84,9 @@ public class InfoEstudiante {
             case 4 -> {
                 logger.info(sl + "*** Modificar Estudiante ***" + sl);
                 logger.info("Ingrese el código del estudiante a editar: ");
-                int codigo = Integer.parseInt(consola.nextLine());
-                Estudiante estudiante = estudianteService.buscarEstudiantePorId(codigo);
+                 //int codigo = Integer.parseInt(consola.nextLine());
+                String nombreEstudiante = consola.nextLine();
+                Estudiante estudiante = estudianteService.buscarEstudiantePorNombre(nombreEstudiante);
                 if (estudiante != null) {
                     logger.info("Ingrese su nombre: ");
                     String nombre = consola.nextLine();

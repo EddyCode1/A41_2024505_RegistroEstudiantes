@@ -19,6 +19,15 @@ public class EstudianteService implements IEstudianteService {
     }
 
     @Override
+    public Estudiante buscarEstudiantePorNombre(String nombre) {
+        List<Estudiante> estudiantes = crud.findByNombre(nombre);
+        if (!estudiantes.isEmpty()){
+            return estudiantes.get(0);
+        }
+            return null;
+    }
+
+    @Override
     public Estudiante buscarEstudiantePorId(Integer codigo) {
         Estudiante estudiante = crud.findById(codigo).orElse(null);
         return estudiante;

@@ -9,4 +9,6 @@ public interface ICursosService {
     Cursos buscarCursoPorNombre(String nombreCurso);
     void guardarCurso(Cursos cursos);
     void eliminarCurso(Cursos cursos);
+    void asignarEstudianteACurso(Integer codigoCurso, Integer codigoEstudiante);
+
 }

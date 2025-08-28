@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface CursoCrud extends JpaRepository<Cursos, Integer> {
 
-    List<Cursos> findByNombreCurso(String nombreCurso);
+    List<Cursos> findByNombreCurso(String nombre);
 }
