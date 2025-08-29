@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<h:html xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h = "http://xmlns.jcp.org/jsf/html"
+        xmlns:f = "http://xmlns.jcp.org/jsf/core"
+        xmlns:p = "http://primefaces.org/ui">
+    <h:head>
+        <title>Registro Curso</title>
+        <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css"/>
+        <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/themes/primeone-dark.css"/>
+
+    </h:head>
+    <h:body>
+
+        <p>Registro Curso</p>
+        <div class="card">
+            <h:form id="formulario-cursos">
+                <!--Mensaje emergente -->
+                <p:growl id="mensaje_emergente" showDetails="true"/>
+
+                <div class="card">
+                    <p:menubar>
+                        <p:menuitem value="Inicio" icon="pi pi-fw pi-user"
+                                    update=":formulario-cursos:tabla-cursos"
+                                    actionListener="#{cursoController.cargarDatos}"/>
+                        <p:menuitem value="Nuevo Curso" icon="pi pi-fw pi-plus"
+                                    actionListener="#{cursoController.agregarCurso}"
+                                    update=":formulario-modal:ventana-curso"
+                                    oncomplete="PF('ventanaModalCurso').show()"/>
+                    </p:menubar>
+                </div>
+                <!-- Tabla de datos -->
+                <div class="card">
+                    <p:dataTable value="#{cursoController.cursos}" var="curso" id="tabla-cursos" widgetVar="tablaCursos">
+                        <!-- Encabezado -->
+                        <f:facet name="header">
+                            <div class="flex justify-content-center flex-wrap card-container yellow-container">
+                                <div class="flex align-items-center
+                                            justify-content-center
+                                            w-20rem h-4rem
+                                            bg-yellow-500 font-bold
+                                            text-gray-900 border-round m-2">
+                                    <h3>Registro, cursos</h3>
+                                </div>
+                            </div>
+                        </f:facet>
+                        <!-- Todas las columnas -->
+                        <p:column headerText="ID">
+                            <h:outputText value="#{curso.codigoCurso}"/>
+                        </p:column>
+                        <p:column headerText="NOMBRE" sortBy="#{curso.nombreCurso}" filterBy="#{curso.nombreCurso}">
+                            <h:outputText value="#{curso.nombreCurso}"/>
+                        </p:column>
+
+                        <p:column headerText="IDESTUDIANTE">
+                            <h:outputText value="#{curso.codigoEstudiante}"/>
+                        </p:column>
+
+                        <p:column headerText="OPCION">
+                            <p:commandButton value="Editar" icon="pi pi-pencil" class="ui-button-primary"
+                                             update=":formulario-modal:ventana-curso"
+                                             process="@this" style="margin-right: 5rem"
+                                             oncomplete="PF('ventanaModalCurso').show()">
+                                <f:setPropertyActionListener value="#{curso}"
+                                                             target="#{cursoController.cursoSeleccionado}"/>
+                                <p:resetInput target=":formulario-modal:ventana-curso"/>
+                            </p:commandButton>
+                            <p:commandButton value="Eliminar" icon="pi pi-trash" class="ui-button-danger"
+                                             process="@this"
+                                             oncomplete="PF('ventanaEliminarCurso').show()">
+                                <f:setPropertyActionListener value="#{curso}"
+                                                             target="#{cursoController.cursoSeleccionado}"/>
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </h:form>
+            <h:form id="formulario-modal">
+                    <p:dialog header="Detalle del Curso" showEffect="fade"
+                          modal="true" widgetVar="ventanaModalCurso" responsive="true">
+                    <p:outputPanel id="ventana-curso" class="ui-fluid">
+
+                        <div class="field">
+                            <p:outputLabel for="nombreCurso">NOMBRE</p:outputLabel>
+                            <p:inputText id="nombreCurso" required="true"
+                                         value="#{cursoController.cursoSeleccionado.nombreCurso}"/>
+                        </div>
+
+                        <div class="field">
+                            <p:outputLabel for="codigoEstudiante">ID Estudiante</p:outputLabel>
+                            <p:inputText id="codigoEstudiante"
+                                         value="#{cursoController.cursoSeleccionado.codigoEstudiante}"/>
+                        </div>
+
+                    </p:outputPanel>
+                    <f:facet name="footer">
+                        <p:commandButton value="Guardar" icon="pi pi-check"
+                                         class="ui-button-primary"
+                                         process="ventana-curso @this"
+                                         actionListener="#{cursoController.guardarCurso}"/>
+                        <p:commandButton value="Cancelar" icon="pi pi-times" class="ui-button-secondary"
+                                         onclick="PF('ventanaModalCurso').hide()" type="button"/>
+                    </f:facet>
+                </p:dialog>
+                <p:confirmDialog widgetVar="ventanaEliminarCurso" showEffect="fade"
+                                 width="300" message="¿Desea eliminar el curso?"
+                                 header="Confirme su selección" severity="warn">
+                    <p:commandButton value="Si" icon="pi pi-check" style="ui-button-primary"
+                                     process="@this"
+                                     actionListener="#{cursoController.eliminarCurso}"
+                                     oncomplete="PF('ventanaEliminarCurso').hide()"/>
+                    <p:commandButton value="No" icon="pi pi-times" style="ui-button-warning"
+                                     onclick="PF('ventanaEliminarCurso').hide()"
+                                     type="button"/>
+                </p:confirmDialog>
+            </h:form>
+        </div>
+    </h:body>
+</h:html>

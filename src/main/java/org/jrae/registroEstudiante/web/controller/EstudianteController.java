@@ -2,6 +2,8 @@ package org.jrae.registroEstudiante.web.controller;
 
 
 import jakarta.annotation.PostConstruct;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import lombok.Data;
 import org.slf4j.Logger;
@@ -15,9 +17,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component  // <- Nombre con el que lo llamas en el xhtml
-@ViewScoped                     // <- Mantiene estado mientras estés en la vista
+@Component
+@ViewScoped
 @Data
+
 public class EstudianteController implements Serializable{
 
     @Autowired
@@ -42,7 +45,7 @@ public class EstudianteController implements Serializable{
         this.estudiantes.forEach(estudiante -> logger.info(estudiante.toString() + sl));
     }
 
-    // Preparar un nuevo estudiante para el modal
+
     public void prepararNuevoEstudiante() {
         this.estudianteSeleccionado = new Estudiante();
     }
@@ -55,23 +58,26 @@ public class EstudianteController implements Serializable{
         }
     }
 
-    // Cargar estudiante para editar
+
     public void editarEstudiante(Estudiante estudiante) {
+
         this.estudianteSeleccionado = estudiante;
     }
 
-    // Eliminar estudiante
-    public void eliminarEstudiante(Estudiante estudiante) {
-        estudianteService.eliminarEstudiante(estudiante);
-        cargarEstudiantes();
+    public void eliminarEstudiante() {
+        if (estudianteSeleccionado != null) {
+            estudianteService.eliminarEstudiante(estudianteSeleccionado);
+            cargarEstudiantes(); // Para refrescar la lista
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Estudiante eliminado"));
+        }
     }
+
 
     // Buscar estudiante por nombre
     public void buscarEstudiante() {
         if (estudianteBusqueda != null && estudianteBusqueda.getNombre() != null && !estudianteBusqueda.getNombre().isEmpty()) {
             Estudiante encontrado = estudianteService.buscarEstudiantePorNombre(estudianteBusqueda.getNombre());
             if (encontrado != null) {
-                // mostrar solo el encontrado en la tabla
                 estudiantes = new ArrayList<>();
                 estudiantes.add(encontrado);
             } else {

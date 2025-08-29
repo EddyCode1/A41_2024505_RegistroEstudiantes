@@ -37,12 +37,12 @@ public class CursoService implements ICursosService {
         crud.delete(cursos);
     }
 
-    @Override
+  /*  @Override
     public void asignarEstudianteACurso(Integer codigoCurso, Integer codigoEstudiante) {
         Cursos curso = crud.findById(codigoCurso).orElse(null);
         if (curso != null) {
             curso.setCodigoEstudiante(codigoEstudiante);
             crud.save(curso);
         }
-    }
+    }*/
 }

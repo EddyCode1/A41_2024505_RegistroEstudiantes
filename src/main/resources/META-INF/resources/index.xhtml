@@ -4,7 +4,7 @@
         xmlns:f = "http://xmlns.jcp.org/jsf/core"
         xmlns:p = "http://primefaces.org/ui">
     <h:head>
-        <title>Kinvana 2024505</title>
+        <title>Menu Principal</title>
         <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css"/>
         <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/themes/primeone-dark.css"/>
 
@@ -17,7 +17,8 @@
                              ajax="false"
                             styleClass="p-mb-2"/>
             <p:commandButton value="Gestion de Cursos"
-                             action="#{InfoCursos.menuCursos}"
+                             action="#{cursoController.ejecutar}"
+                             ajax="false"
                              styleClass="p-mb-2"/>
 <!--            <p:commandButton value="Salir"-->
 <!--                             action="#{salir}"-->

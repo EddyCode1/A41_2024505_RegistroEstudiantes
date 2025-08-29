@@ -81,9 +81,13 @@
                                              actionListener="#{estudianteController.editarEstudiante(estudiante)}"
                                              update=":formulario-modal:ventana-estudiante"
                                              oncomplete="PF('VentaModaEstudiante').show()"/>
+
                             <p:commandButton value="Eliminar" icon="pi pi-trash" class="ui-button-danger"
-                                             actionListener="#{estudianteController.eliminarEstudiante(estudiante)}"
-                                             update=":formulario-estudiantes:tabla-estudiantes"/>
+                                             process="@this"
+                                             oncomplete="PF('ventanaEliminarCliente').show()">
+                                <f:setPropertyActionListener value="#{estudiante}"
+                                                             target="#{estudianteController.estudianteSeleccionado}"/>
+                            </p:commandButton>
                         </p:column>
                     </p:dataTable>
                 </div>
@@ -117,6 +121,18 @@
                                          onclick="PF('VentaModaEstudiante').hide()" type="button"/>
                     </f:facet>
                 </p:dialog>
+                <p:confirmDialog widgetVar="ventanaEliminarCliente" showEffect="fade"
+                                 width="300" message="¿Desea eliminar el cliente?"
+                                 header="Confirme su selección" severity="warn">
+                    <p:commandButton value="Si" icon="pi pi-check" styleClass="ui-button-primary"
+                                     process="@this"
+                                     actionListener="#{estudianteController.eliminarEstudiante}"
+                                     update=":formulario-estudiantes:tabla-estudiantes"
+                                     oncomplete="PF('ventanaEliminarCliente').hide()"/>
+                    <p:commandButton value="No" icon="pi pi-times" style="ui-button-warning"
+                                     onclick="PF('ventanaEliminarCliente').hide()"
+                                     type="button"/>
+                </p:confirmDialog>
             </h:form>
         </div>
     </h:body>

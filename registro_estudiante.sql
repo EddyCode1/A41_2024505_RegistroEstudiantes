@@ -15,14 +15,18 @@ create table Cursos(
     nombre_curso varchar(68), 
     codigo_estudiante int, 
     constraint pk_cursos primary key(codigo_curso), 
-    constraint fk_Cursos foreign key(codigo_estudiante)
+    
+    constraint fk_Cursos_Estudiante foreign key(codigo_estudiante)
 		references Estudiante(codigo_estudiante)
 );
  
 insert into Estudiante(nombre, apellido, correo)
 		value("Angel","Reyes","ag@kinal.edu.gt"); 
+        
 insert into Cursos(nombre_curso, codigo_estudiante)
 		value('Matematica', 1),
 			('Fisica', 1),
             ('Etica', 1); 
 select * from Estudiante; 
+
+select *from Cursos; 	

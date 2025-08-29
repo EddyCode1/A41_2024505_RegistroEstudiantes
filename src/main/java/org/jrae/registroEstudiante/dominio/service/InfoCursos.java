@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class InfoCursos {
-
+/*
     private final ICursosService cursosService;
     private static final Logger logger = LoggerFactory.getLogger(InfoCursos.class);
     private final String sl = System.lineSeparator();
@@ -116,5 +116,5 @@ public class InfoCursos {
         }
 
         return salir;
-    }
+    }*/
 }

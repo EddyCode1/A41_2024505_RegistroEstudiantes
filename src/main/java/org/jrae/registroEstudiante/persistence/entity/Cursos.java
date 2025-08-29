@@ -3,6 +3,8 @@ package org.jrae.registroEstudiante.persistence.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity(name = "Cursos")
 
 @Data
@@ -18,4 +20,9 @@ public class Cursos {
     @Column
     private String nombreCurso;
     private Integer codigoEstudiante;
+/*
+    @OneToMany
+    @JoinColumn(name = "codigoEstudiante", referencedColumnName = "codigoEstudiante", insertable = false, updatable = false)
+    private List<Estudiante> estudiantesInscritos;*/
+
 }
