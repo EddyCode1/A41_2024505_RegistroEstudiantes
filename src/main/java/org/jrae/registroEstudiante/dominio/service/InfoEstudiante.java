@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 public class InfoEstudiante {
 
+    /*
     private final IEstudianteService estudianteService;
     private static final Logger logger = LoggerFactory.getLogger(InfoEstudiante.class);
     private final String sl = System.lineSeparator();
@@ -124,5 +125,5 @@ public class InfoEstudiante {
             default -> logger.info("Opción no válida!!" + sl);
         }
         return salir;
-    }
+    }*/
 }

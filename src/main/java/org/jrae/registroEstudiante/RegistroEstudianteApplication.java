@@ -14,10 +14,13 @@ import java.util.Scanner;
 @SpringBootApplication
 public class RegistroEstudianteApplication {
 
-	public static void main(String[] args) {
-		var context = SpringApplication.run(RegistroEstudianteApplication.class, args);
+    public static void main(String[] args) {
+        SpringApplication.run(RegistroEstudianteApplication.class);
+    }
+}
+		// var context = SpringApplication.run(RegistroEstudianteApplication.class, args);
 
-		IEstudianteService estudianteService = context.getBean(EstudianteService.class);
+		/* IEstudianteService estudianteService = context.getBean(EstudianteService.class);
 		ICursosService cursosService = context.getBean(ICursosService.class);
 
 		InfoEstudiante infoEstudiante = new InfoEstudiante(estudianteService);
@@ -46,4 +49,4 @@ public class RegistroEstudianteApplication {
 
 		System.out.println("Aplicación finalizada.");
 	}
-}
+}*/
